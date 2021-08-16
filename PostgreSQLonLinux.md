@@ -73,6 +73,9 @@ The tested versions and configurations are as follows.
     ```
 
 ### Install PostgreSQL
+
+If PostgreSQL has already been installed on both servers, you can skip.
+
 ##### On both servers
 1. Download PostgerSQL rpm file and copy them to the server.
     - https://yum.postgresql.org/rpmchart/
@@ -96,11 +99,46 @@ The tested versions and configurations are as follows.
 
     ```
     # mkdir -p /mnt/md1/pgsql/data
+    ```
+1. If you are already using PostgreSQL and the data is in default directory, you need to move the data to ECX mirror disk.
+    1. Check the current/existing location of PostgreSQL Data Directory.
+
+        ```
+        > psql
+        postgres=# SHOW data_directory;
+           data_directory
+        ---------------------
+        /var/lib/pgsql/13/data
+        (1 row)
+        ```
+    1. Stop the database server
+
+        ```
+        systemctl stop postgresql-13
+        ```
+        or
+        ```
+        $ /usr/pgsql-13/bin/pg_ctl stop -D /var/lib/pgsql/13/data -m fast
+        ```
+    1. Copy the data to ECX mirror disk.
+        
+        ```
+        cp -r /var/lib/pgsql/13/data/* /mnt/md1/pgsql/data
+        ```
+    1. Update the data location in postgresql.conf if you were setting it.
+
+        /mnt/md1/pgsql/data/postgresql.conf
+        ```
+        data_directory = '/mnt/md1/pgsql/data/'
+        ```
+1. Grant the full control of the data directory to the user for PostgreSQL.
+
+    ```
     # chown -R postgres:postgres /mnt/md1/pgsql/data
     # chmod 700 /mnt/md1/pgsql/data
     ```
 1. Login as **postgres** user.
-1. Create a database cluster.
+1. Create a database cluster. **(If this is the first time you use PostgreSQL.)**
 
     ```
     $ /usr/pgsql-13/bin/initdb -D /mnt/md1/pgsql/data -E UTF8 --no-locale -W
@@ -154,10 +192,15 @@ The tested versions and configurations are as follows.
     ```
     $ /usr/pgsql-13/bin/pg_ctl start -D /mnt/md1/pgsql/data -l /dev/null
     ```
-1. Create a database.
+1. Create a database. **(If this is the first time you use PostgreSQL.)**
 
     ```
     $ /usr/pgsql-13/bin/createdb -h localhost -U postgres db1
+    ```
+1. Test the database connection.
+
+    ```
+    $ /usr/pgsql-13/bin/psql -h localhost -U postgres db1
     ```
 1. Stop the database server.
 
@@ -195,7 +238,7 @@ The tested versions and configurations are as follows.
     ```
     $ /usr/pgsql-13/bin/pg_ctl start -D /mnt/md1/pgsql/data -l /dev/null
     ```
-1. Connect to the database.
+1. Test the database connection.
 
     ```
     $ /usr/pgsql-13/bin/psql -h localhost -U postgres db1
