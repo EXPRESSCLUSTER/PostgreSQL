@@ -269,7 +269,7 @@ If PostgreSQL has already been installed on both servers, you can skip.
             |SUUSER|postgres|PostgreSQL user name|
             |PGINST|/usr/pgsql-13|PostgreSQL Install directory|
             |PGDATA|/mnt/sdb2/pgsql/data|Database directory|
-1. Add one PostgreSQL monitor resource to the cluster.
+1. Add one PostgreSQL monitor resource to the cluster. (Database Agent license is required.)
     - Target Resource: exec resource
     - Database Name: db1
     - IP Address: 127.0.0.1
@@ -278,6 +278,20 @@ If PostgreSQL has already been installed on both servers, you can skip.
     - Password: The password of postgres
     - Table: psqlwatch
     - Library Path: /usr/pgsql-13/lib/libpq.so.5.13
+    - Recovery Target: exec resource
+1. **(In case that you don't have Database Agent license)** Add one customer monitor resource instead of PostgreSQL monitor resource.
+
+    This is an alternative option for the user that doesn't have Database Agent license. Please note that PostgreSQL monitor resource has a better monitoring capability than this customer monitor resource.
+    
+    - Target Resource: exec resource
+    - [genw.sh](#genwsh)
+        - Edit parameters.
+
+            |Parameter|Value|Description|
+            |----|----|----|
+            |SUUSER|postgres|PostgreSQL user name|
+            |PGINST|/usr/pgsql-13|PostgreSQL Install directory|
+            |PGDATA|/mnt/sdb2/pgsql/data|Database directory|
     - Recovery Target: exec resource
 1. Apply the configuration.
 1. Start the exec resource.
@@ -370,7 +384,7 @@ exit 0
 #*               stop.sh               *
 #***************************************
 
-#ulimit -s unlimited
+ulimit -s unlimited
 
 #
 # PostgreSQL's Parameters
@@ -423,4 +437,25 @@ else
 fi
 echo "EXIT"
 exit 0
+```
+
+#### `genw.sh`
+```sh
+#! /bin/sh
+#***********************************************
+#*                   genw.sh                   *
+#***********************************************
+
+ulimit -s unlimited
+
+#
+# PostgreSQL's Parameters
+#
+SUUSER="postgres"               # PG user name(OS user)
+PGINST="/usr/pgsql-13"          # PG Install directory
+PGDATA="/mnt/md1/pgsql/data"    # Database directory
+
+su - ${SUUSER} -c "${PGINST}/bin/pg_ctl status -D ${PGDATA}"
+
+exit $?
 ```
