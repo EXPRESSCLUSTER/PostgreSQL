@@ -6,7 +6,7 @@ This guide describes how to setup PostgreSQL with EXPRESSCLUSTER X (ECX).
 
 ## Configuration
 
-2 nodes mirror disk type cluster will be created. The database that is saved on the ECX data partition will be replicated between 2 servers.
+Two nodes mirror disk type cluster will be created. The database that is saved on the ECX data partition will be replicated between 2 servers.
 
 In this guide, mirror disk type cluster is focused, but shared disk type clusters can also be crated.
 The tested versions and configurations are as follows.
@@ -34,7 +34,7 @@ The tested versions and configurations are as follows.
 
 ### Setup a basic cluster
 ##### On both servers
-1. Install ECX.
+1. Install ECX, please refer to [this site](https://github.com/EXPRESSCLUSTER/BasicCluster/blob/master/X41/Lin/2nodesMirror_Lin.md) .
 1. Register licenses.
     - EXPRESSCLUSTER X for Linux
     - EXPRESSCLUSTER X Replicator for Linux
