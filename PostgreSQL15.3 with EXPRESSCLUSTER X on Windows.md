@@ -1,4 +1,4 @@
-PostgreSQL 15.3 Quick Start Guide for EXPRESSCLUSTER X on Windows
+PostgreSQL 15.3 Quick Start Guide for EXPRESSCLUSTER X on Windows Platform
 ===
 
 About this guide
