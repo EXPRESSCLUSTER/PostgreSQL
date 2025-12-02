@@ -32,7 +32,7 @@ For the detailed information of EXPRESSCLUSTER X, please refer to [this site](ht
 		 |  | - Winecxcl01 (Win2k25)   |
 		 |  | - PostgreSQL18.0-2       |
 		 |  | - EXPRESSCLUSTER X 5.3   |
-		 |  | IP Address:10.0.7.83     |
+		 |  | IP Address:127.0.0.1     |
 		 |  | RAM   : 6GB              |
 		 |  | Disk 0: 50GB OS          |
 		 |  |      C: local partition  |
@@ -48,7 +48,7 @@ For the detailed information of EXPRESSCLUSTER X, please refer to [this site](ht
 		 |  | - Winecxcl02 (Win2k25)   |
 		 |  | - PostgreSQL18.0-2       |
 		 |  | - EXPRESSCLUSTER X 5.3   |
-		 |  | IP Address:10.0.7.84     |
+		 |  | IP Address:127.0.0.2     |
          |  | RAM   : 6GB              |
 		 |  | Disk 0: 50GB OS          |
 		 |  |      C: local partition  |
@@ -99,11 +99,11 @@ For the detailed information of EXPRESSCLUSTER X, please refer to [this site](ht
        +----------------------+-----------------------------+
        | Name                 | PostgreSqlFailover          |
        | Startup Server       | Winecxcl01 -> Winecxcl02    |
-       | Floating IP Address  | 10.0.7.182                  |
+       | Floating IP Address  | 127.0.0.3                   |
        | Mirror Disk resource | D:\PostgreSQL               |
        +----------------------+-----------------------------+
 
- Please refer to EXPRESSCLUSTER X 5.3 for Windows Installation and Configuration Guide if want to know how to add the resources. (https://www.nec.com/en/global/prod/expresscluster/en/doc/manuals/W53_IG_EN_02.pdf) .
+ Please refer to EXPRESSCLUSTER X 5.3 for Windows Installation and Configuration Guide if want to know how to add the  resources. (https://www.nec.com/en/global/prod/expresscluster/en/doc/manuals/W53_IG_EN_02.pdf) .
 
  After you add failover group and execute apply the configuration file, you start failover group on Node1 (Winecxcl01).  
      
