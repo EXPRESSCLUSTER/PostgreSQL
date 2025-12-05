@@ -1,4 +1,4 @@
-EXPRESSCLUSTER X with PostgreSQL 18.0-2 on Windows Platform Quick Start Guide
+PostgreSQL 18 with EXPRESSCLUSTER X on Windows
 ===
 
 About this guide
@@ -172,7 +172,7 @@ For the detailed information of EXPRESSCLUSTER X, please refer to [this site](ht
  
 ### **8. PostgreSQL Setup (Node1)**
         
-- Start the MySQL service to check it is working fine.
+- Start the PostgreSQL service to check it is working fine.
     
         - From services.msc start the PostgreSQL Service.
         - From services.msc stop the PostgreSQL Service.
